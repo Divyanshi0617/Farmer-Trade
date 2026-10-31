@@ -18,7 +18,7 @@ function BuyerDashboard() {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem("token");
-        
+
         // Fetch available crops count
         const cropsRes = await fetch("http://localhost:5000/api/marketplace/crops");
         const cropsData = await cropsRes.json();
@@ -56,7 +56,7 @@ function BuyerDashboard() {
             setStorageCount(storeData.storage.length);
           }
         }
-      } catch (e) {}
+      } catch (e) { }
     };
     fetchStats();
   }, []);
@@ -73,7 +73,7 @@ function BuyerDashboard() {
       <aside className="dashboard-sidebar" style={{ background: '#0e1c26' }}>
         <div className="dashboard-logo" style={{ color: '#ffffff' }}>
           🏪 Farmer<span>Trade</span>
-          <div style={{ fontSize: '11px', color: '#7a96a8', marginTop: '2px', fontWeight: '500' }}>by HumanLink</div>
+          <div style={{ fontSize: '11px', color: '#7a96a8', marginTop: '2px', fontWeight: '500' }}>by Shinobi Sync</div>
         </div>
 
         <nav>

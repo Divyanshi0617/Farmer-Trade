@@ -168,8 +168,8 @@ function Home() {
         {/* HERO VISUAL */}
         <div className="hero-visual">
 
-          <div 
-            className="market-card" 
+          <div
+            className="market-card"
             onClick={() => navigate("/market-prices")}
             style={{ cursor: "pointer" }}
             title="Click to view live Mandi market prices"
@@ -475,7 +475,7 @@ function Home() {
       <footer>
 
         <div className="logo">
-          🌾 Farmer<span>Trade</span> <small style={{ fontSize: '12px', opacity: 0.8, fontWeight: 'normal' }}>— by HumanLink</small>
+          🌾 Farmer<span>Trade</span> <small style={{ fontSize: '12px', opacity: 0.8, fontWeight: 'normal' }}>— by Shinobi Sync</small>
         </div>
 
         <p>

@@ -83,7 +83,7 @@ function FarmerDashboard() {
     if (savedUser) {
       try {
         setUser(JSON.parse(savedUser));
-      } catch (e) {}
+      } catch (e) { }
     }
   }, []);
 
@@ -139,7 +139,7 @@ function FarmerDashboard() {
             setStorageCount(storeData.storage.length);
           }
         }
-      } catch (e) {}
+      } catch (e) { }
     };
     fetchStats();
   }, []);
@@ -162,7 +162,7 @@ function FarmerDashboard() {
       <aside className="dashboard-sidebar">
         <div className="dashboard-logo">
           🌾 Farmer<span>Trade</span>
-          <div style={{ fontSize: '11px', color: '#88a090', marginTop: '2px', fontWeight: '500' }}>by HumanLink</div>
+          <div style={{ fontSize: '11px', color: '#88a090', marginTop: '2px', fontWeight: '500' }}>by Shinobi Sync</div>
         </div>
 
         <nav>
