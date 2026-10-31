@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { indiaLocations } from "../data/indiaLocations";
 
 const content = {
   en: {
@@ -111,7 +112,7 @@ function MarketPrices() {
   // Data states
   const [marketPrices, setMarketPrices] = useState([]);
   const [summary, setSummary] = useState(null);
-  const [filterOptions, setFilterOptions] = useState({ crops: [], states: [], districts: [] });
+  const [filterOptions, setFilterOptions] = useState({ crops: [], states: Object.keys(indiaLocations), districts: [] });
   const [farmerCrops, setFarmerCrops] = useState([]);
   const [historyData, setHistoryData] = useState([]);
   
@@ -191,7 +192,7 @@ function MarketPrices() {
       if (data.filterOptions) {
         setFilterOptions(prev => ({
           crops: data.filterOptions.crops || prev.crops,
-          states: data.filterOptions.states || prev.states,
+          states: Array.from(new Set([...Object.keys(indiaLocations), ...(data.filterOptions.states || [])])).sort(),
           districts: data.filterOptions.districts || prev.districts
         }));
       }
@@ -438,7 +439,7 @@ function MarketPrices() {
                 style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ccc', background: '#fafafa', fontSize: '14px', fontFamily: 'inherit' }}
               >
                 <option value="">{t.allDistricts}</option>
-                {filterOptions.districts.map(d => (
+                {(selectedState && indiaLocations[selectedState] ? indiaLocations[selectedState] : (selectedState ? [] : Object.values(indiaLocations).flat().sort())).map(d => (
                   <option key={d} value={d}>{d}</option>
                 ))}
               </select>
