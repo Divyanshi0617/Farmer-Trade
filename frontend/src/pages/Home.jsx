@@ -435,11 +435,94 @@ function Home() {
       </section>
 
 
-      {/* CTA */}
+      {/* ABOUT SECTION */}
       <section
-        className="cta"
         id="about"
+        style={{
+          background: "#ffffff",
+          padding: "70px 24px",
+          borderTop: "1px solid #e8eee6",
+          borderBottom: "1px solid #e8eee6"
+        }}
       >
+        <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
+          <span
+            style={{
+              display: "inline-block",
+              background: "#eaf4e8",
+              color: "#1e5e2e",
+              fontSize: "13px",
+              fontWeight: "700",
+              letterSpacing: "1px",
+              padding: "6px 16px",
+              borderRadius: "20px",
+              marginBottom: "16px",
+              textTransform: "uppercase"
+            }}
+          >
+            About Farmer Trade
+          </span>
+
+          <h2
+            style={{
+              fontSize: "32px",
+              fontWeight: "800",
+              color: "#18361f",
+              marginBottom: "24px",
+              lineHeight: "1.3"
+            }}
+          >
+            Empowering Farmers Through Technology & Transparency
+          </h2>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "18px",
+              fontSize: "17px",
+              lineHeight: "1.7",
+              color: "#475449",
+              textAlign: "left",
+              background: "#f9fbf9",
+              padding: "36px",
+              borderRadius: "16px",
+              border: "1px solid #e2ede0",
+              boxShadow: "0 6px 20px rgba(0,0,0,0.03)"
+            }}
+          >
+            <p style={{ margin: 0 }}>
+              Agriculture feeds our nation, yet farmers often struggle to receive the true value of their hard work.
+            </p>
+
+            <p style={{ margin: 0 }}>
+              <strong>Farmer Trade</strong> is an AI-powered agricultural marketplace that connects farmers directly with buyers, providing market price insights, price comparisons, and better trading opportunities.
+            </p>
+
+            <p style={{ margin: 0 }}>
+              By combining technology and transparency, we aim to bridge the gap between farmers and markets, making agricultural trading smarter, fairer, and more accessible.
+            </p>
+
+            <div
+              style={{
+                marginTop: "10px",
+                padding: "16px 20px",
+                background: "#eaf4e8",
+                borderLeft: "4px solid #1e5e2e",
+                borderRadius: "8px",
+                color: "#18361f",
+                fontWeight: "600",
+                fontSize: "17px"
+              }}
+            >
+              🌱 Our vision is simple: Every farmer deserves the opportunity to earn the true value of their hard work.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="cta">
 
         <div>
 
