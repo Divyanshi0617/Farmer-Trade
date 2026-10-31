@@ -224,6 +224,12 @@ function MarketPrices() {
     }
   };
 
+  const handleStateChange = (newState) => {
+    setSelectedState(newState);
+    setSelectedDistrict("");
+    fetchMarketPrices(selectedCrop, newState, "", searchMarket, sortBy);
+  };
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     fetchMarketPrices(selectedCrop, selectedState, selectedDistrict, searchMarket, sortBy);
@@ -411,7 +417,7 @@ function MarketPrices() {
               </label>
               <select
                 value={selectedState}
-                onChange={(e) => setSelectedState(e.target.value)}
+                onChange={(e) => handleStateChange(e.target.value)}
                 style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ccc', background: '#fafafa', fontSize: '14px', fontFamily: 'inherit' }}
               >
                 <option value="">{t.allStates}</option>

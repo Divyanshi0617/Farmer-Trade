@@ -56,7 +56,12 @@ const getMarketPrices = async (req, res) => {
         // Get filter options (distinct crops, states, districts) for frontend dropdowns
         const availableCrops = await MarketPrice.distinct("cropName");
         const availableStates = await MarketPrice.distinct("state");
-        const availableDistricts = await MarketPrice.distinct("district");
+        // Filter districts by selected state if provided
+        const districtFilter = {};
+        if (state && state.trim()) {
+            districtFilter.state = { $regex: new RegExp('^' + state.trim() + '$', 'i') };
+        }
+        const availableDistricts = await MarketPrice.distinct("district", districtFilter);
 
         res.status(200).json({
             success: true,
