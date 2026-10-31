@@ -59,6 +59,7 @@ export default function ChatbotWidget() {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const recognitionRef = useRef(null);
+  const handleSendMessageRef = useRef(null);
 
   // Sync to sessionStorage
   useEffect(() => {
@@ -85,11 +86,14 @@ export default function ChatbotWidget() {
         recog.lang = "en-IN"; // Supports bilingual Indian context
 
         recog.onresult = (event) => {
-          const transcript = event.results[0][0].transcript;
-          if (transcript) {
-            setInputValue((prev) => (prev ? prev + " " + transcript : transcript));
-          }
+          const transcript = event.results?.[0]?.[0]?.transcript?.trim();
           setIsListening(false);
+          if (transcript) {
+            setInputValue(transcript);
+            if (handleSendMessageRef.current) {
+              handleSendMessageRef.current(transcript, true);
+            }
+          }
         };
 
         recog.onerror = (e) => {
@@ -216,7 +220,7 @@ export default function ChatbotWidget() {
   };
 
   // Send message
-  const handleSendMessage = async (textToSend = null) => {
+  const handleSendMessage = async (textToSend = null, speakReply = false) => {
     const text = (textToSend || inputValue).trim();
     if (!text || isLoading) return;
 
@@ -285,6 +289,9 @@ export default function ChatbotWidget() {
       };
 
       setMessages((prev) => [...prev, botMessage]);
+      if (speakReply && replyText) {
+        handleSpeak(botMessage.id, replyText);
+      }
     } catch (err) {
       console.error("Chat error:", err);
       const errorMessage = {
@@ -299,6 +306,7 @@ export default function ChatbotWidget() {
       setIsLoading(false);
     }
   };
+    handleSendMessageRef.current = handleSendMessage;
 
   // Keyboard shortcut (Enter to submit, Shift+Enter for newline)
   const handleKeyDown = (e) => {
