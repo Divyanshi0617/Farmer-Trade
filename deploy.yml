@@ -1,0 +1,73 @@
+name: Deploy Farmer Trade to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Detect frontend directory
+        id: app
+        shell: bash
+        run: |
+          if [ -f "package.json" ]; then
+            echo "dir=." >> "$GITHUB_OUTPUT"
+          elif [ -f "frontend/package.json" ]; then
+            echo "dir=frontend" >> "$GITHUB_OUTPUT"
+          else
+            echo "Could not find package.json in the repository root or frontend/." >&2
+            exit 1
+          fi
+
+      - name: Install dependencies
+        working-directory: ${{ steps.app.outputs.dir }}
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Build React + Vite website
+        working-directory: ${{ steps.app.outputs.dir }}
+        run: npm run build
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.app.outputs.dir }}/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
